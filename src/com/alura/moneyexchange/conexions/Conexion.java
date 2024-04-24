@@ -33,7 +33,7 @@ public class Conexion {
 
     public Currency getData(String baseCurrency) throws IOException, InterruptedException{
 
-        String address = "https://v6.exchangerate-api.com/v6/ed9c35d26151a9b3b33d8e0e/latest/" + baseCurrency ;
+        String address = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/latest/" + baseCurrency ;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

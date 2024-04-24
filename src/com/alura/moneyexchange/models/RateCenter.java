@@ -2,6 +2,7 @@ package com.alura.moneyexchange.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class RateCenter {
 
@@ -23,14 +24,21 @@ public class RateCenter {
     }
 
     //Pego a moeda se ja foi consultada ou um optional vazio
-    public double getExchangeRateFromBaseCurrency(String baseCurrency, String quoteCurency) {
-    return 0.5;/*this.currencies.stream()
-                 .filter(currency -> currency.getAcronym().equals(baseCurrency))
-                 .forEach(e -> e.getRateOfAQuotedMoney(quoteCurency));*/
-      }
-      @Override
-      public String toString() {
+    public Optional<Double> getExchangeRate(String baseCurrency, String quoteCurency) {
+        return this.currencies.stream()
+                .filter(currency -> currency.getAcronym().equalsIgnoreCase(baseCurrency))
+                .map(c -> c.getRateOfAQuotedMoney(quoteCurency))
+                .findFirst();
+    }
 
-          return currencies.toString();
-      }
+    public boolean checkIsCurrency(Optional<Currency> optCurrency){
+        return optCurrency.isPresent();
+    }
+
+
+    @Override
+    public String toString() {
+
+        return currencies.toString();
+    }
 }

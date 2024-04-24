@@ -2,13 +2,14 @@ package com.alura.moneyexchange.models;
 
 import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 public class Currency {
 
     private String acronym;
     private Map<String,Double> rates;
-    // private Map<String,String> rates = new HashMap<String,String>();
 
     Currency(){}
 
@@ -41,13 +42,13 @@ public class Currency {
 
     @Override
     public String toString() {
-        return "Currency{"  + acronym + '\'' +
-                '}';
+        return  acronym;
     }
 
-    public Double getRateOfAQuotedMoney(String quoteMoney){
+    public Double getRateOfAQuotedMoney(String aQuoteMoney){
+        String quoteMoney = aQuoteMoney.toUpperCase();
         if(this.rates.containsKey(quoteMoney)){
             return this.rates.get(quoteMoney);
-        }else return (double) -1;
+       }else return (double) -1;
     }
-}
+    }

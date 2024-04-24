@@ -7,6 +7,7 @@ import com.alura.moneyexchange.models.RateCenter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -47,7 +48,6 @@ public class Main {
 
             System.out.println(message);
             option = scanner.nextInt();
-
 
             switch(option){
                 case 1:
@@ -102,11 +102,28 @@ public class Main {
 
                 //verificar si esta ja descargadas las rates para la baseCurrency
                 if(!center.isConsultedToday(baseCurrency)){
+
+                    //obtengo los datos dessa moeda na API e la guardo en la lista de moedas
                     Currency currency = con.getData(baseCurrency);
                     center.insertCurrency(currency);
                 }
+                //obtengo el rate para calcular el valor de la conversion
 
-                double rate = center.getExchangeRateFromBaseCurrency(baseCurrency,quoteCurrency);
+                Double rate = 0.0;
+
+                Optional<Double> optRate= center.getExchangeRate(baseCurrency,quoteCurrency);
+                if(optRate.isPresent()){
+                    rate = optRate.get();
+
+                    if(!(rate == -1.0)){System.out.println("A taxa de hoje é: " + rate);}
+                    else{
+                        System.out.println("imposivle taxa para esa moeda");
+                    }
+
+                }else {
+                    System.out.println("Não foi possivel achar a taxa para essa moeda");
+                }
+
                 System.out.println(center);
 
                 //***********
