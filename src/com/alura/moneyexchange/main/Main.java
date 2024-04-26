@@ -5,10 +5,8 @@ import com.alura.moneyexchange.models.Currency;
 import com.alura.moneyexchange.models.RateCenter;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.sql.SQLOutput;
+import java.util.*;
 
 public class Main {
     public static <IOException extends Throwable> void main(String[] args) throws IOException, InterruptedException, java.io.IOException {
@@ -46,8 +44,12 @@ public class Main {
 
         while(flag){
 
+            try{
+
             System.out.println(message);
             option = scanner.nextInt();
+
+
 
             switch(option){
                 case 1:
@@ -94,6 +96,7 @@ public class Main {
             } //swith
 
 
+
             if(( option > 0 && option < 8 )){
                 System.out.println("Opção escolhida: " + option + ") " + baseCurrency + " => " + quoteCurrency);
 
@@ -130,6 +133,14 @@ public class Main {
                 System.out.println("======================================================================");
                 System.out.println("Total a converter: " + valor + " " + baseCurrency + ", corresponde ao valor final => " + valor * rate + " " +  quoteCurrency);
                 System.out.println("======================================================================");
+            }
+            }catch( InputMismatchException e){
+                System.out.println("Por favor escreva uma opção válida");
+                flag = false;
+
+            }
+            finally {
+
             }
         }
     }
