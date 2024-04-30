@@ -20,7 +20,7 @@ public class RateCenter {
 
     //devolve true se essa moeda ja foi consultada e por tanto esta salva no arrayList de moedas
     public boolean isConsultedToday(String baseCurrency){
-        return this.currencies.stream().anyMatch(currency -> currency.getAcronym().equals(baseCurrency) );
+       return this.currencies.stream().anyMatch(currency -> currency.getAcronym().equalsIgnoreCase(baseCurrency) );
     }
 
     //Pego a moeda se ja foi consultada ou um optional vazio
@@ -38,7 +38,6 @@ public class RateCenter {
 
     @Override
     public String toString() {
-
         return currencies.toString();
     }
 }

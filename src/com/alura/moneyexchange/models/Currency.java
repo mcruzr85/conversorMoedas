@@ -45,6 +45,7 @@ public class Currency {
         return  acronym;
     }
 
+    //retorna -1 se não tem essa quotedMoney no hash
     public Double getRateOfAQuotedMoney(String aQuoteMoney){
         String quoteMoney = aQuoteMoney.toUpperCase();
         if(this.rates.containsKey(quoteMoney)){
