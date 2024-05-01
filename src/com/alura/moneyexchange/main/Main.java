@@ -12,10 +12,6 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         Conexion con = new Conexion();
         RateCenter center = new RateCenter();
-
-        System.out.println("***********************************************************");
-        System.out.println("       Seja Bem-vindo(a) ao Conversor de Moedas ☻");
-
         Scanner scanner = new Scanner(System.in);
 
         String baseCurrency = "";
@@ -40,6 +36,9 @@ public class Main {
                  Escolha uma opção entre as anteriores
                  **********************************************************
                  """;
+
+        System.out.println("***********************************************************");
+        System.out.println("       Seja Bem-vindo(a) ao Conversor de Moedas ☻");
 
 
         while (flag) {
@@ -84,20 +83,22 @@ public class Main {
                         quoteCurrency = scanner.nextLine().toUpperCase();
                         break;
                     default:
-                        if (!(option > 0 && option < 9)) {
+                        if (!((option > 0) && (option < 9))) {
                             System.out.println("Escolha não válida - Selecione um número entre 1 e 8");
                         } else {
-                            System.out.println("Muito obrigada pela visita!! Até mais!");
+                            System.out.println("Muito obrigado por usar o conversor de moedas!! Até mais!");
                             flag = false;
+                            break;
                         }
-                        break;
+
 
                 } //swith
 
+                if(option > 0 && option < 8){
 
                     System.out.println("Opção escolhida: " + option + ") " + baseCurrency + " => " + quoteCurrency);
 
-                    System.out.println("Digite o valor que deseja converter");
+                    System.out.println("Digite o valor que deseja converter: ");
                     valor = scanner.nextDouble();
 
                     //verificar si esta ja descargadas las rates para la baseCurrency
@@ -113,7 +114,7 @@ public class Main {
 
                         } else {
                             System.out.println("Não foi possivel achar a taxa de conversão para essa moeda");
-                            System.out.println("Favor confira se " + baseCurrency + " é uma moeda");
+                            System.out.println("Favor confira se " + baseCurrency + " é uma moeda válida");
                         }
 
                     }
@@ -133,22 +134,19 @@ public class Main {
                             if (rate != -1.0) {
                                 Double resultado = Math.round(valor * rate * 100.0) / 100.0;
 
-
-
-                            System.out.println("A taxa de hoje é: " + rate);
+                                System.out.println("A taxa de hoje é: " + rate);
                                 System.out.println("===================================================================================");
                                 System.out.println("Total a converter: " + valor + " " + baseCurrency + ", corresponde ao valor final => " + resultado + " " + quoteCurrency);
                                 System.out.println("===================================================================================");
                                 System.out.println("\n");
                             } else {
                                 //se não tem rate para essa quotedMoney
-                                System.out.println("Não foi possivel achar a taxa de conversão para essa moeda");
-                                System.out.println("Favor confira se " + quoteCurrency + " é uma moeda");
+                                System.out.println("Não foi possivel achar a taxa de conversão de " + baseCurrency + " para essa moeda");
+                                System.out.println("Favor confira se " + quoteCurrency + " é uma moeda válida");
                             }
-
                         }
-
                     }
+                }
 
             }catch(InputMismatchException e){
                 System.out.println("Por favor escreva uma opção válida");
